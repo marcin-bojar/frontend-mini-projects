@@ -1,0 +1,9 @@
+[submodule "signup-form---demo"]
+	path = signup-form---demo
+	url = https://github.com/marcin-bojar/signup-form---demo.git
+[submodule "movie-seat-picker---demo"]
+	path = movie-seat-picker---demo
+	url = https://github.com/marcin-bojar/movie-seat-picker---demo.git
+[submodule "video-player"]
+	path = video-player
+	url = https://github.com/marcin-bojar/video-player.git
