@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap');
 
 :root {
@@ -62,10 +61,13 @@ h1 {
     backface-visibility: hidden;
 }
 
- 
-.btn:hover, .btn:active, .btn:focus {
+.btn:hover, .btn:active {
     background-color: #fdcc9a;
     animation: move .3s;
+    outline: none;
+}
+
+.btn:focus {
     outline: none;
 }
 
@@ -96,6 +98,27 @@ h1 {
     justify-content: space-between;
     font-size: 2.2rem;
     width: 100%;
+    margin-bottom: 1rem;
+}
+
+.total {
+    padding: 1rem;
+    background-color: #fff;
+    font-size: 1.8rem; 
+    margin-top: 3rem;
+    border-bottom: var(--border);
+}
+
+.total p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.total span {
+    font-weight: bold;
+    font-size: 2.2rem; 
 }
 
 @keyframes move {
