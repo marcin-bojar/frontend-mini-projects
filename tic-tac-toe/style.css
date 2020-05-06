@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    background-image: linear-gradient(rgba(182, 132, 132, 0.5), rgba(158, 108, 66, 0.5)), url(./img/back.jpg);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 1.6rem;
+    line-height: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 8rem;
+    color: rgb(0, 0, 0);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    width: 75%;
+    max-height: 80vh;
+    margin: 2rem;
+   
+}
+
+.player {
+    background-color: #ececec99;
+    height: 10rem;
+    width: 30rem;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.15);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.player.active {
+    background-color: #ececec; 
+}
+
+.player.active .player__heading {
+    color: rgb(255, 21, 21);
+    font-size: 5rem;
+}
+
+.player__heading {
+    font-size: 4rem;
+    color: #6d6d6d; 
+}
+
+.player__score {
+    font-size: 6rem;
+    color: #464646;
+}
+
+.game-board {
+    width: 50rem;
+    height: 50rem;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: .5rem;
+    margin: 1rem 4rem;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.15);
+}
+
+.game-board__field {
+    background-color: rgba(237, 237, 237, .55);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15rem;
+}
+
+.game-board__field.selected {
+    background-color: rgba(237, 237, 237, .9);
+    cursor: default;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0 2rem;
+    padding: .5rem 3rem;
+    border-radius: 5px;
+    border: 1px solid #666;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+    background-color: #3688ca;
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.25);  
+    transition: all .2s;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: #246ca7;
+}
+
