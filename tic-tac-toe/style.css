@@ -13,7 +13,7 @@ html {
 
 body {
     box-sizing: border-box;
-    background-image: linear-gradient(rgba(182, 132, 132, 0.5), rgba(158, 108, 66, 0.5)), url(./img/back.jpg);
+    background-image: linear-gradient(rgba(132, 158, 182, 0.377), rgba(95, 158, 66, 0.5)), url(./img/back-min.jpg);
     background-position: bottom;
     background-size: cover;
     background-repeat: no-repeat;

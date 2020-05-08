@@ -11,10 +11,11 @@
     const reset = document.getElementById('reset');
 
     let activePlayer,
-        score0 = 0,
-        score1 = 0,
-        count,
-        fieldsArr = [];
+        score0 = 0,         // player one score
+        score1 = 0,         // player two score
+        count,              // counts number of moves in each round
+        myTurn = true,      // defines which player begins round
+        fieldsArr = [];     // data array for saving selected fields
 
     //Game initialization
     function init() {
@@ -23,18 +24,23 @@
             el.className = 'game-board__field';
         });
         displayScores();
-        activePlayer = 1;
+        activePlayer = myTurn ? 1 : 2;
         count = 0;
         player0.className = 'player player0';
         player1.className = 'player player1';
         player0Name.innerText = 'Player 1';
         player1Name.innerText = 'Player 2';
-        player0.classList.add('active');
-        gameFieldsEl.forEach(el => el.style.cursor = 'pointer');
+        if(activePlayer === 1) player0.classList.add('active');
+        else player1.classList.add('active');
+        gameFieldsEl.forEach(el => el.style = 'none');
         fieldsArr = [];
+        if(!myTurn) makeMoveAI();
+        
+        myTurn = myTurn ? false : true;
+        
         
         //Event listeners
-        gameBoardEl.addEventListener('click', makeMove);
+        activePlayer === 1 ? gameBoardEl.addEventListener('click', makeMove) : gameBoardEl.removeEventListener('click', makeMove);
         newGame.addEventListener('click', init);
         reset.addEventListener('click', resetScores);
     };
@@ -72,6 +78,15 @@
             return move;
         };
 
+        const lastMove = () => {
+            let move;
+            for(let i = 0; i < 9; i++) {
+                if(!fieldsArr[i]) move = i;
+            }
+            return move;
+        };
+
+        if(fieldsArr.length === 0) moveWin = randomMove();
         fieldsArr.forEach((el, i) => {
 
             
@@ -82,7 +97,7 @@
                // console.log(`Entering LOGIC ${a}`);
                 if(el === a) {
                     if (i === 0) {
-                        if(count < 1) move = randomMove(); 
+                        if(count === 8) move = lastMove(); 
                         if(fieldsArr[1] === a && fieldsArr[2]=== undefined) move = 2;
                         else if(fieldsArr[3] === a && fieldsArr[6] === undefined) move = 6;
                         else if(fieldsArr[4] === a && fieldsArr[8] === undefined) move = 8;
@@ -90,13 +105,13 @@
                         else if(fieldsArr[6] === a && fieldsArr[3] === undefined) move = 3;
                         else if(fieldsArr[8] === a && fieldsArr[4] === undefined) move = 4;
                     } else if (i === 1) {
-                        if(count < 1) move = randomMove();  
+                        if(count === 8) move = lastMove();  
                         if(fieldsArr[2] === a && fieldsArr[0] === undefined) move = 0;
                         else if(fieldsArr[0] === a && fieldsArr[2] === undefined) move = 2;
                         else if(fieldsArr[4] === a && fieldsArr[7] === undefined) move = 7;
                         else if(fieldsArr[7] === a && fieldsArr[4] === undefined) move = 4;
                     } else if (i === 2) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         if(fieldsArr[1] === a && fieldsArr[0] === undefined) move = 0;
                         else if(fieldsArr[4] === a && fieldsArr[6] === undefined) move = 6;
                         else if(fieldsArr[5] === a && fieldsArr[8] === undefined) move = 8;
@@ -104,13 +119,13 @@
                         else if(fieldsArr[6] === a && fieldsArr[4] === undefined) move = 4;
                         else if(fieldsArr[8] === a && fieldsArr[5] === undefined) move = 5;
                     } else if (i === 3) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         if(fieldsArr[4] === a && fieldsArr[5] === undefined) move = 5;
                         else if(fieldsArr[5] === a && fieldsArr[4] === undefined) move = 4;
                         else if(fieldsArr[0] === a && fieldsArr[6] === undefined) move = 6;
                         else if(fieldsArr[6] === a && fieldsArr[0] === undefined) move = 0;
                     } else if (i === 4) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         if(fieldsArr[5] === a && fieldsArr[3] === undefined) move = 3;
                         else if(fieldsArr[1] === a && fieldsArr[7] === undefined) move = 7;
                         else if(fieldsArr[2] === a && fieldsArr[6] === undefined) move = 6;
@@ -118,13 +133,13 @@
                         else if(fieldsArr[8] === a && fieldsArr[0] === undefined) move = 0;
                         else if(fieldsArr[0] === a && fieldsArr[8] === undefined) move = 8;
                     } else if (i === 5) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         if(fieldsArr[4] === a && fieldsArr[3] === undefined) move = 3;
                         else if(fieldsArr[3] === a && fieldsArr[4] === undefined) move = 4;
                         else if(fieldsArr[2] === a && fieldsArr[8] === undefined) move = 8;
                         else if(fieldsArr[8] === a && fieldsArr[2] === undefined) move = 2;
                     } else if (i === 6) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         if(fieldsArr[7] === a && fieldsArr[8] === undefined) move = 8;
                         else if(fieldsArr[8] === a && fieldsArr[7] === undefined) move = 7;
                         else if(fieldsArr[4] === a && fieldsArr[2] === undefined) move = 2;
@@ -132,13 +147,13 @@
                         else if(fieldsArr[3] === a && fieldsArr[0] === undefined) move = 0;
                         else if(fieldsArr[0] === a && fieldsArr[3] === undefined) move = 3;
                     } else if (i === 7) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         if(fieldsArr[8] === a && fieldsArr[6] === undefined) move = 6;
                         else if(fieldsArr[6] === a && fieldsArr[8] === undefined) move = 8;
                         else if(fieldsArr[4] === a && fieldsArr[1] === undefined) move = 1;
                         else if(fieldsArr[1] === a && fieldsArr[4] === undefined) move = 4;
                     } else if (i === 8) {
-                        if(count < 1) move = randomMove();
+                        if(count === 8) move = lastMove();
                         else if(fieldsArr[7] === a && fieldsArr[6] === undefined) move = 6;
                         else if(fieldsArr[2] === a && fieldsArr[5] === undefined) move = 5; 
                         else if(fieldsArr[4] === a && fieldsArr[0] === undefined) move = 0;
@@ -319,8 +334,6 @@
             afterMove();       
             }, 750);
         
-
-        
     };
 
     //Searching for winning configuration
@@ -375,6 +388,7 @@
         //Continue game
         } else {
             activePlayer === 1 ? activePlayer = 2 : activePlayer = 1;
+            activePlayer === 1 ? gameBoardEl.addEventListener('click', makeMove) : gameBoardEl.removeEventListener('click', makeMove);
             player0.classList.toggle('active');
             player1.classList.toggle('active');
             if(activePlayer === 2) makeMoveAI();
