@@ -53,6 +53,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .player.active {
@@ -96,6 +97,7 @@ h1 {
     justify-content: center;
     font-size: 15rem;
     border-radius: 5px;
+    user-select: none;
 }
 
 .game-board__field.selected {
