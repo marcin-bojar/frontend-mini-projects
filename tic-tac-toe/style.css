@@ -89,12 +89,13 @@ h1 {
 }
 
 .game-board__field {
-    background-color: rgba(237, 237, 237, .55);
+    background-color: #ededed46;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15rem;
+    border-radius: 5px;
 }
 
 .game-board__field.selected {
@@ -102,18 +103,28 @@ h1 {
     cursor: default;
 }
 
+.controls {
+    display: flex;
+    align-items: center;
+}
+
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin: 0 2rem;
     padding: .5rem 3rem;
-    border-radius: 5px;
-    border: 1px solid #666;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 1.8rem;
-    color: #fff;
+    font-weight: bold;
+    color: #333;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+    /* border-radius: 5px;
+    border: 1px solid #666;
     background-color: #3688ca;
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.25);  
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.25);   */
     transition: all .2s;
 }
 
@@ -123,6 +134,34 @@ h1 {
 
 .btn:hover,
 .btn:active {
-    background-color: #246ca7;
+    color: rgb(207, 207, 207); 
+}
+
+.btn:hover .btn__icon--new { animation: rotate .5s; }
+.btn:hover .btn__icon--reset { transform: translateX(-3px); }
+
+.btn__icon--new {
+    fill: currentColor;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+}
+
+.btn__icon--reset {
+    fill: currentColor;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: .5rem;
+    transition: transform .3s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
