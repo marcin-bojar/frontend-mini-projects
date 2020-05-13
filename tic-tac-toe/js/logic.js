@@ -13,9 +13,9 @@ var APP = (function(app) {
         const randomMove = () => {
             let move = Math.floor(Math.random() * 9);
             
-            while(fieldsArr[move] === 1 || fieldsArr[move] === 2) {
-                move = Math.floor(Math.random() * 9);     
-            };
+            // while(fieldsArr[move] === 1 || fieldsArr[move] === 2) {
+            //     move = Math.floor(Math.random() * 9);
+            // };
 
             return move;
         };

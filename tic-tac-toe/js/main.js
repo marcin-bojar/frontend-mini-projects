@@ -13,9 +13,6 @@ var APP = (function(app, logic) {
     let score0 = 0,         // player one score
         score1 = 0,         // player two score
         myTurn = true;      // defines which player begins round
-        app.fieldsArr = [];     // data array for saving selected fields
-        app.count;              // counts number of moves in each round
-        app.activePlayer;
 
     //Game initialization
     function init() {
@@ -24,8 +21,10 @@ var APP = (function(app, logic) {
             el.className = 'game-board__field';
         });
         displayScores();
-        activePlayer = myTurn ? 1 : 2;
-        count = 0;
+        //3 GLOBALS :(
+        window.activePlayer = myTurn ? 1 : 2;
+        window.count = 0;      // counts number of moves in each round
+        window.fieldsArr = [];    // data array for saving selected fields
         player0.className = 'player player0';
         player1.className = 'player player1';
         player0Name.innerText = 'Player 1';
@@ -33,7 +32,6 @@ var APP = (function(app, logic) {
         if(activePlayer === 1) player0.classList.add('active');
         else player1.classList.add('active');
         gameFieldsEl.forEach(el => el.style = 'none');
-        fieldsArr = [];
         if(!myTurn) logic.makeMoveAI();
         
         myTurn = myTurn ? false : true;
