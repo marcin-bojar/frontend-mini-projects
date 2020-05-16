@@ -21,15 +21,12 @@ var APP = (function(app, logic) {
             el.className = 'game-board__field';
         });
         displayScores();
-        //3 GLOBALS :(
-        window.activePlayer = myTurn ? 1 : 2;
-        window.count = 0;      // counts number of moves in each round
-        window.fieldsArr = [];    // data array for saving selected fields
+        logic.initLogic(myTurn); 
         player0.className = 'player player0';
         player1.className = 'player player1';
         player0Name.innerText = 'Player 1';
         player1Name.innerText = 'Player 2';
-        if(activePlayer === 1) player0.classList.add('active');
+        if(logic.getActivePlayer() === 1) player0.classList.add('active');
         else player1.classList.add('active');
         gameFieldsEl.forEach(el => el.style = 'none');
         if(!myTurn) logic.makeMoveAI();
@@ -37,7 +34,7 @@ var APP = (function(app, logic) {
         
         
         //Event listeners
-        activePlayer === 1 ? gameBoardEl.addEventListener('click', makeMove) : gameBoardEl.removeEventListener('click', makeMove);
+        logic.getActivePlayer() === 1 ? gameBoardEl.addEventListener('click', makeMove) : gameBoardEl.removeEventListener('click', makeMove);
         newGame.addEventListener('click', init);
         reset.addEventListener('click', resetScores);
     };
@@ -46,13 +43,13 @@ var APP = (function(app, logic) {
     function makeMove(e) {
         if(e.target.id >= 1 && e.target.id <= 9 && !e.target.classList.contains('selected')) {
             //Increment selected fields counter
-            count++;
+            logic.incrementCount();
             //Save selected field to data array
-            fieldsArr[e.target.id-1] = activePlayer;
+            logic.addField(e.target.id-1);
             //Update UI
             e.target.classList.add('selected');
             e.target.removeEventListener('click', e);   
-            activePlayer === 1 ? e.target.innerText = 'O' : e.target.innerText = 'X';
+            logic.getActivePlayer() === 1 ? e.target.innerText = 'O' : e.target.innerText = 'X';
             afterMove();
         }   
     };
@@ -60,9 +57,9 @@ var APP = (function(app, logic) {
     //End game when there is a winner
     function endGame() {
         //Update UI
-        const winner = document.getElementById(`player${activePlayer}-name`);
+        const winner = document.getElementById(`player${logic.getActivePlayer()}-name`);
         winner.innerText = 'WINNER';
-        activePlayer === 1 ? score0++ : score1++;
+        logic.getActivePlayer() === 1 ? score0++ : score1++;
         displayScores();
         gameFieldsEl.forEach(el => el.style.cursor = 'default');
         //Remove game board event listener
@@ -88,16 +85,16 @@ var APP = (function(app, logic) {
         if(logic.checkWinner()) {
             endGame();
         //Check if all fields are already selected
-        } else if(count === 9) {
+        } else if(logic.getCount() === 9) {
             player0.className = 'player player0';
             player1.className = 'player player1';
         //Continue game
         } else {
-            activePlayer === 1 ? activePlayer = 2 : activePlayer = 1;
-            activePlayer === 1 ? gameBoardEl.addEventListener('click', makeMove) : gameBoardEl.removeEventListener('click', makeMove);
+            logic.getActivePlayer() === 1 ? logic.setActivePlayer(2) : logic.setActivePlayer(1);
+            logic.getActivePlayer() === 1 ? gameBoardEl.addEventListener('click', makeMove) : gameBoardEl.removeEventListener('click', makeMove);
             player0.classList.toggle('active');
             player1.classList.toggle('active');
-            if(activePlayer === 2) logic.makeMoveAI();
+            if(logic.getActivePlayer() === 2) logic.makeMoveAI();
         }
     };
 

@@ -2,6 +2,36 @@ var APP = (function(app) {
     //Submodule
     let sub = app.logic = app.logic || {};
 
+    let activePlayer,
+        count,          // counts number of moves in each round
+        fieldsArr;    // data array for saving selected fields
+
+    function initLogic(myTurn) {
+        activePlayer = myTurn ? activePlayer = 1 : activePlayer = 2;
+        count = 0;
+        fieldsArr = [];
+    };
+
+    function getActivePlayer() {
+        return activePlayer;
+    };
+
+    function setActivePlayer(num) {
+        activePlayer = num;
+    };
+
+    function addField(index) {
+        fieldsArr[index] = activePlayer;
+    };
+
+    function getCount() {
+        return count;
+    }
+
+    function incrementCount() {
+        count++;
+    };
+
     // Selecting field by computer
     function makeMoveAI() {
         let moveTaken,
@@ -295,6 +325,12 @@ var APP = (function(app) {
 
     sub.makeMoveAI = makeMoveAI;
     sub.checkWinner = checkWinner;
+    sub.initLogic = initLogic;
+    sub.getActivePlayer = getActivePlayer;
+    sub.setActivePlayer = setActivePlayer;
+    sub.addField = addField;
+    sub.incrementCount = incrementCount;
+    sub.getCount = getCount;
 
     return app;
 
