@@ -21,11 +21,19 @@ body {
     font-family: 'East Sea Dokdo', cursive;
     font-size: 1.6rem;
     line-height: 1;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
 }
 
 h1 {
@@ -37,16 +45,15 @@ h1 {
     display: flex;
     align-items: center;
     background-color: transparent;
-    width: 75%;
-    max-height: 80vh;
-    margin: 2rem;
-   
+    width: 95%;
+    max-width: 100rem;
+    height: 75%;
 }
 
 .player {
     background-color: #ececec99;
     height: 10rem;
-    width: 30rem;
+    width: 30%;
     box-shadow: 0 1rem 3rem rgba(0,0,0,.15);
     border-radius: 5px;
     display: flex;
@@ -64,7 +71,6 @@ h1 {
 .player.active .player__heading {
     color: rgb(255, 21, 21);
     font-size: 5rem;
-    
 }
 
 .player__heading {
@@ -77,9 +83,37 @@ h1 {
     color: #464646;
 }
 
+@media only screen and (max-width: 800px) {
+    .player.active .player__heading {
+        font-size: 4rem;
+    }
+
+    .player__heading {
+        font-size: 3.25rem;
+    }
+
+    .player__score {
+        font-size: 4.5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .player {
+        height: 7rem;
+    }
+
+    .player.active .player__heading {
+        font-size: 3.4rem;
+    }
+
+    .player__heading {
+        font-size: 2.7rem;
+    }
+}
+
 .game-board {
-    width: 50rem;
-    height: 50rem;
+    width: 75%;
+    height: 80%;
     background-color: transparent;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -95,7 +129,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15rem;
+    font-size: 19vh;
     border-radius: 5px;
     user-select: none;
 }

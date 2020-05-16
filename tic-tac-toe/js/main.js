@@ -33,7 +33,6 @@ var APP = (function(app, logic) {
         else player1.classList.add('active');
         gameFieldsEl.forEach(el => el.style = 'none');
         if(!myTurn) logic.makeMoveAI();
-        
         myTurn = myTurn ? false : true;
         
         
