@@ -1,6 +1,6 @@
 const searchField = document.getElementById('search');
 const submit = document.querySelector('#submit');
-const randomBtn = document.getElementById('random-btn');
+const randomBtn = document.getElementById('random');
 const resultHeading = document.getElementById('result-heading');
 const meals = document.getElementById('meals');
 const single_meal = document.getElementById('single-meal');
@@ -17,9 +17,7 @@ async function searchMeals(e) {
             console.log(result);
 
             //Clear UI for new results
-            searchField.value = '';
-            meals.innerHTML = '';
-            single_meal.innerHTML = '';
+            clearUI();
     
             //Display search results
             if(result.meals === null) {
@@ -54,11 +52,27 @@ async function getMealById(id) {
         const meal = result.meals[0];
     
         addMealToDOM(meal);
+        window.location = '#single-meal';
 
     } catch(error) {
         console.log(error);
     }
 };
+
+async function getRandomMeal() { 
+    clearUI();
+
+    try {
+        const res = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+        const result = await res.json();
+        const meal = result.meals[0];
+
+        addMealToDOM(meal);
+
+    } catch(error) {
+        console.log(error);
+    }
+}
 
 function addMealToDOM(meal) {
     const ingredients = [];
@@ -76,13 +90,13 @@ function addMealToDOM(meal) {
             <h1>${meal.strMeal}</h1>
             <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
             <div class="category">
-                <h3>${meal.strCategory ? meal.strCategory : ''}</h3>
-                <h3>${meal.strArea ? meal.strArea : ''}</h3>
+                <h3>Category - ${meal.strCategory ? meal.strCategory : ''}</h3>
+                <h3>Origin - ${meal.strArea ? meal.strArea : ''}</h3>
             </div>
             <div class="main">
                 <p>${meal.strInstructions}</p>
                 <h2>Ingredients</h2>
-                <ul>
+                <ul class="ingredients">
                     ${ingredients.map(el => `<li>${el}</li>`).join('')}          
                 </ul>
             </div>
@@ -90,8 +104,19 @@ function addMealToDOM(meal) {
     `;
 };
 
+function clearUI() {
+    searchField.value = '';
+    resultHeading.innerHTML = '';
+    meals.innerHTML = '';
+    single_meal.innerHTML = '';
+};
+
 //Event listeners
 submit.addEventListener('click', searchMeals);
+search.addEventListener('kepressed', e => {
+    if(e.target.keycode === 13 || e.target.which === 13)
+        searchMeals();
+});
 meals.addEventListener('click', e => {
     e.path.forEach(el => {
         if(el.classList) {
@@ -99,7 +124,8 @@ meals.addEventListener('click', e => {
                const mealID = el.getAttribute('data-mealid');
                 getMealById(mealID);
             }
-        } else return false;        
+        }       
     });
    
 });
+randomBtn.addEventListener('click', getRandomMeal);
