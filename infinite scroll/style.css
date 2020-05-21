@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    background-image: linear-gradient(#1e52e0, #355dcc);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    padding: 2rem;
+    padding-bottom: 10rem;
+}
+
+.filter-container {
+    width: 80vw;
+    max-width: 60rem;
+    margin-top: 3rem;
+}
+
+.filter {
+    width: 100%;
+    padding: .5rem 1.5rem;
+    border-radius: 3px;
+    border: 1px solid #3d3d3d;
+    font-family: inherit;
+    font-size: inherit;
+    margin-bottom: 4rem;
+}
+
+.post {
+    position: relative;
+    width: 80vw;
+    max-width: 80rem;
+    margin: 4rem auto;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0, .25);
+    padding: 4rem;
+    background-color: #3980eb;
+    border-radius: 3px;
+}
+
+.post__number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #3980eb;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.post__body {
+    margin-top: 2rem;
+    line-height: 1.4;
+}
+
+.loader {
+    /* opacity: 0 */
+    display: flex;
+    position: fixed;
+    bottom: 5rem;
+    transition: opacity .3s ease-in;
+}
+
+.loader.shown {
+    opacity: 1;
+}
+
+.circle {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: #fff;
+    margin: .5rem;
+    animation: bounce .5s ease-in infinite;
+}
+
+.circle:nth-child(2) {
+    animation-delay: .1s;
+}
+
+.circle:nth-child(3) {
+    animation-delay: .2s;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-1rem);
+    }
+}
