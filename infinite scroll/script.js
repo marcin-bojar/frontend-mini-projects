@@ -1,11 +1,12 @@
 const posts = document.querySelector('.posts-container');
 const filter = document.getElementById('filter');
 const loader = document.querySelector('.loader');
-let ready = true;   //flag for fetching new posts only once when user hits bottom of the page
+let ready = true;   // flag for fetching new posts only once when user hits bottom of the page
 
-let limit = 3;
-let page = 1;
+let limit = 3;  // how many posts fetch in one request
+let page = 1;   
 
+//Fetch posts from API
 async function getPosts() {
     try {
         console.log(`request for ${limit} posts starting on page ${page}`);
@@ -17,6 +18,7 @@ async function getPosts() {
     } 
 };
 
+// Display posts in UI
 async function renderPosts() {
     try {
         loader.classList.add('shown');
@@ -41,6 +43,7 @@ async function renderPosts() {
     }   
 };
 
+// Check if user scrolled to the bottom of the page
 function isAtBottom() {
     let { scrollTop, clientHeight, scrollHeight } = document.documentElement;
      
@@ -50,15 +53,34 @@ function isAtBottom() {
             page++;
             renderPosts();
         }
-            
+        
+        // setTimeout prevents from multiple fetch requests when getting to bottom of page
         setTimeout(() => {
             ready = true;
         }, 100);        
     }   
 };
 
-//Render initial posts
+// Filter posts by specifed term
+function filterPosts(e) {
+    const posts = document.querySelectorAll('.post');
+    const term = e.target.value.toUpperCase();
+
+    posts.forEach(el => {
+        const title = el.querySelector('.post__title').innerText.toUpperCase();
+        const body = el.querySelector('.post__body').innerText.toUpperCase();
+
+        if(title.includes(term) || body.includes(term)) {
+            el.style.display = 'flex';
+        } else {
+            el.style.display = 'none';
+        }
+    });
+};
+
+// Render initial posts
 renderPosts();
 
-//Event listeners
+// Event listeners
 window.addEventListener('scroll', isAtBottom);
+filter.addEventListener('input', filterPosts);
