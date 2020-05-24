@@ -1,13 +1,15 @@
 const posts = document.querySelector('.posts-container');
 const filter = document.getElementById('filter');
 const loader = document.querySelector('.loader');
+let ready = true;   //flag for fetching new posts only once when user hits bottom of the page
 
 let limit = 3;
 let page = 1;
 
 async function getPosts() {
     try {
-        const res = await fetch(`https://jsonplaceholder.typicode.com/users/1/posts?_limit=${limit}&_page=${page}`);
+        console.log(`request for ${limit} posts starting on page ${page}`);
+        const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`);
         const data = await res.json();
         return data;
     } catch(error) {
@@ -17,12 +19,12 @@ async function getPosts() {
 
 async function renderPosts() {
     try {
-        console.log('Request');
         loader.classList.add('shown');
         const postsData = await getPosts();
         loader.classList.remove('shown');
-        
+        console.log(page);
         postsData.forEach(el => {
+            
             const postEl = document.createElement('div');
             postEl.classList.add('post');
             postEl.innerHTML = `
@@ -39,13 +41,24 @@ async function renderPosts() {
     }   
 };
 
+function isAtBottom() {
+    let { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+     
+    if(scrollTop + clientHeight >= scrollHeight - 5) { 
+        if(ready) {
+            ready = false;
+            page++;
+            renderPosts();
+        }
+            
+        setTimeout(() => {
+            ready = true;
+        }, 100);        
+    }   
+};
+
+//Render initial posts
 renderPosts();
 
-window.addEventListener('scroll', () => {
-    let { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    console.log(scrollHeight, scrollTop+clientHeight);
-    if(scrollTop + clientHeight >= scrollHeight - 1) {
-       page++;
-       renderPosts();     
-    }
-});
+//Event listeners
+window.addEventListener('scroll', isAtBottom);
