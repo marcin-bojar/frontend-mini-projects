@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: #464d64;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Quicksand', sans-serif;
+    padding: 2rem;
+}
+
+.settings-btn {
+    position: absolute;
+    cursor: pointer;
+    bottom: 2rem;
+    left: 2rem;
+    padding: .5rem 1.5rem;
+    background-color: rgb(192, 192, 192);
+    border-radius: 3px;
+    border: 1px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 1.4rem;
+}
+
+.settings {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, .3);
+}
+
+select {
+    width: 15rem;
+    background-color: #313750;
+    color: #fff;
+    padding: .5rem 1rem;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.container {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0, .3);
+    padding: 2rem;
+    text-align: center;
+    background-color: #666b7c;
+    width: 30vw;
+    min-width: 35rem;
+    max-width: 55rem;
+    position: relative;
+}
+
+h2 {
+    margin-bottom: 3rem;
+    background-color: rgba(0,0,0, .3);
+    padding: .75rem 1.5rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.text {
+    padding: .75rem 1.5rem;
+    margin-top: 1rem;
+    font-size: inherit;
+    font-family: inherit;
+    border-radius: 3px;
+    border: none;
+    width: 90%;
+    text-align: center;
+}
+
+.time-container, .score-container {
+    position: absolute;
+    top: 7rem;
+    font-size: 1.5rem;
+}
+
+.time-container {
+    left: 2rem;
+}
+
+.score-container {
+    right: 2rem;
+}
+
