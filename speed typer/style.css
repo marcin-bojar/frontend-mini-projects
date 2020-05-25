@@ -48,6 +48,11 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(0,0,0, .3);
+    transition: transform .5s ease-in-out;
+}
+
+.settings.hidden {
+    transform: translateY(-100%);
 }
 
 select {
@@ -55,6 +60,7 @@ select {
     background-color: #313750;
     color: #fff;
     padding: .5rem 1rem;
+    margin-left: 1rem;
     font-size: inherit;
     font-family: inherit;
 }
@@ -181,8 +187,7 @@ select:focus {
 }
 
 @keyframes show {
-    0%,
-    100% {
+    0% {
         opacity: 0;
         transform: translateY(-1rem);
     }
@@ -197,7 +202,6 @@ select:focus {
 
     100% {
         opacity: 0;
-        transform: translateY(0);
     }
 }
 

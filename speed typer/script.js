@@ -1,4 +1,5 @@
 const settingsBtn = document.getElementById('settings-btn');
+const settingsContainer = document.getElementById('settings');
 const selectDifficulty = document.getElementById('difficulty');
 const word = document.querySelector('.word');
 const wordInput = document.querySelector('.text');
@@ -87,16 +88,17 @@ function clearInput() {
 
 // Initialize game
 async function init() {
+    word.innerHTML = '';
     score = 0;
     scoreEl.innerHTML = score;
     time = 10;
     timeEl.innerHTML = time;
     wordInput.focus();
     clearInput();
-    timeInterval = setInterval(updateTime, 1000);
     endGameEl.style.display = 'none';
     await getWords();
     renderRandomWord();
+    timeInterval = setInterval(updateTime, 1000);
 };
 
 init();
@@ -108,3 +110,8 @@ document.addEventListener('click', e => {
         init();
     }
 });
+settingsBtn.addEventListener('click', () => {
+    settingsContainer.classList.toggle('hidden');
+});
+selectDifficulty.addEventListener('change', e => localStorage.setItem('difficulty', e.target.value));
+window.addEventListener('DOMContentLoaded' , () => selectDifficulty.value = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'medium');
