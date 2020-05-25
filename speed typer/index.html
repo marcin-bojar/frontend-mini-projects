@@ -24,16 +24,23 @@
             </div>
         </form>
     </div>
+    <div class="loader">
+        <p>Loading new set of words <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></p>
+    </div>
+    
 
     <div class="container">
         <h2>👩‍💻 Speed Typer 👨‍💻</h2>
         <small>Type the following:</small>
-        <h1 class="word">TEST</h1>
+        <h1 class="word"></h1>
         <input type="text" class="text" autocomplete="off" placeholder="Type the word here...">
         <p class="time-container">Time: <span id="time">10s</span></p>
         <p class="score-container">Score: <span id="score">0</span></p>
         <div id="end-game-container" class="end-game-container"></div>
+        <div class="end-game-container" id="end-game-container"></div>
     </div>
+
+    
     <script src="script.js"></script>
 </body>
 </html>
