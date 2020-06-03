@@ -6,17 +6,11 @@ const description = document.getElementById('text');
 const amount = document.getElementById('amount');
 const form = document.getElementById('form');
 
-const temporaryTransactions = [
-    // {id:1, text: 'Fuel', amount: -80 },
-    // {id:2, text: 'Salary', amount: 1080 },
-    // {id:3, text: 'Food', amount: -189 },
-    // {id:4, text: 'Lottery', amount: 180 },
-    // {id:5, text: 'Rent', amount: -780.20 }
-];
+const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
 
 // Data container
 const data = {
-    transactions: temporaryTransactions,
+    transactions: localStorage.getItem('transactions') !== null ? localStorageTransactions : [],
     totals: {
         inc: 0,
         exp: 0
@@ -27,8 +21,8 @@ const data = {
 // Add stored transactions to DOM
 function addTransactionDOM(transaction) {
     const sign = transaction.amount < 0 ? '-' : '+';
-
     const item = document.createElement('li');
+    
     item.classList.add('list__item', transaction.amount < 0 ? 'minus' : 'plus');
     item.setAttribute('data-id', `${transaction.id}`)
     item.innerHTML = `
@@ -36,30 +30,6 @@ function addTransactionDOM(transaction) {
     `;
 
     list.appendChild(item);
-};
-
-// Calculate Budget balance, total income and total expense
-function calcTotals() {
-    data.totals.inc = data.transactions
-        .filter( el => el.amount > 0)
-        .reduce((acc, el) => acc += el.amount, 0);
-   
-    data.totals.exp = data.transactions
-        .filter( el => el.amount < 0)
-        .reduce((acc, el) => acc += el.amount, 0);
-
-    data.budget = data.totals.inc - Math.abs(data.totals.exp);
-};
-
-// Render data values in UI
-function displayTotals() {
-    balance.innerText = `$${data.budget.toFixed(2)}`;
-    income.innerText = `$${data.totals.inc.toFixed(2)}`;
-    expense.innerText = `$${Math.abs(data.totals.exp).toFixed(2)}`;
-};
-
-function generateID() {
-    return Math.floor(Math.random() * 100000000);
 };
 
 // Add transaction to data container and display in UI
@@ -86,8 +56,8 @@ function addTransaction(e) {
         // Clear input
         description.value = '';
         amount.value = '';
+        updateLocalStorage();
     }
-    
 };
 
 function removeTransaction(e) {
@@ -102,9 +72,39 @@ function removeTransaction(e) {
         // Update values and UI
         calcTotals();
         displayTotals();
+        updateLocalStorage();
     }
     
-}
+};
+
+// Calculate Budget balance, total income and total expense
+function calcTotals() {
+    data.totals.inc = data.transactions
+        .filter( el => el.amount > 0)
+        .reduce((acc, el) => acc += el.amount, 0);
+   
+    data.totals.exp = data.transactions
+        .filter( el => el.amount < 0)
+        .reduce((acc, el) => acc += el.amount, 0);
+
+    data.budget = data.totals.inc - Math.abs(data.totals.exp);
+};
+
+// Render data values in UI
+function displayTotals() {
+    balance.innerText = `$${data.budget.toFixed(2)}`;
+    income.innerText = `$${data.totals.inc.toFixed(2)}`;
+    expense.innerText = `$${Math.abs(data.totals.exp).toFixed(2)}`;
+};
+
+function generateID() {
+    return Math.floor(Math.random() * 100000000);
+};
+
+// Save data in localStorage
+function updateLocalStorage() {
+    localStorage.setItem('transactions', JSON.stringify(data.transactions));
+};
 
 function init() {
     list.innerHTML = '';
