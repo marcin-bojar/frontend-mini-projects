@@ -22,7 +22,7 @@ const data = {
 function addTransactionDOM(transaction) {
     const sign = transaction.amount < 0 ? '-' : '+';
     const item = document.createElement('li');
-    
+
     item.classList.add('list__item', transaction.amount < 0 ? 'minus' : 'plus');
     item.setAttribute('data-id', `${transaction.id}`)
     item.innerHTML = `
@@ -35,15 +35,17 @@ function addTransactionDOM(transaction) {
 // Add transaction to data container and display in UI
 function addTransaction(e) {
     let transaction;
+    const id = manageID.generateID();
     e.preventDefault();
     // Get input values
-    if(description.value.trim() !== '' && amount.value.trim() !== '') {
+    if(description.value.trim() !== '' && amount.value.trim() !== '' && id !== null)  {
         transaction = {
-            id: generateID(),
+            id,
             text: description.value,
             amount: parseFloat(amount.value)
         }
-    }
+    } else 
+        transaction = null;
 
     if(transaction) {
         // Add data to data container
@@ -69,12 +71,12 @@ function removeTransaction(e) {
         list.removeChild(e.target.parentNode);
         // Remove transaction from data container
         data.transactions = data.transactions.filter(el => el.id !== ID);
+        manageID.deleteID(ID);
         // Update values and UI
         calcTotals();
         displayTotals();
         updateLocalStorage();
-    }
-    
+    }   
 };
 
 // Calculate Budget balance, total income and total expense
@@ -97,9 +99,46 @@ function displayTotals() {
     expense.innerText = `$${Math.abs(data.totals.exp).toFixed(2)}`;
 };
 
-function generateID() {
-    return Math.floor(Math.random() * 100000000);
-};
+// ID MANAGER
+const manageID = (function() {
+    // Closure used to store generated ID's
+    let usedIDs = data.transactions.map(el => el.id);
+    const limit = 1000;
+
+    function generateID() {
+            // Generate random ID
+            let ID = Math.floor(Math.random() * limit);
+            // Check if generated ID was already used
+            if(usedIDs.includes(ID)) {
+                // If all IDs where used inform user that list is full
+                if(usedIDs.length >= limit)
+                {
+                    alert('List is full! Delete some items in order to be able to add new ones...');
+                    ID = null;
+                    return ID;
+                // If IDs are still available keep generating new ID until unique number comes up    
+                } else {
+                    do {
+                        ID = Math.floor(Math.random() * limit)
+                    }
+                    while (usedIDs.includes(ID));
+                }  
+            }
+
+            usedIDs.push(ID);
+            return ID;
+    }
+
+    function deleteID(id) {
+       usedIDs = usedIDs.filter( el => el !== id);
+    }
+
+        return {
+            generateID: generateID,
+            deleteID: deleteID
+        }
+})();
+    
 
 // Save data in localStorage
 function updateLocalStorage() {
