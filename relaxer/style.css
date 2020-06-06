@@ -62,3 +62,30 @@ body {
     border-radius: 50%;
     z-index: -2;
 }
+
+.pointer {
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.pointer-container {
+    position: absolute;
+    top: -3.95rem;
+    left: 14rem;
+    animation: rotate 7.5s infinite linear forwards;
+    height: 19rem;
+    transform-origin: bottom;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
