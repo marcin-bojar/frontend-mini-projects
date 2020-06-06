@@ -9,7 +9,7 @@ let page = 1;
 //Fetch posts from API
 async function getPosts() {
     try {
-        console.log(`request for ${limit} posts starting on page ${page}`);
+        //console.log(`request for ${limit} posts starting on page ${page}`);
         const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`);
         const data = await res.json();
         return data;
@@ -24,7 +24,7 @@ async function renderPosts() {
         loader.classList.add('shown');
         const postsData = await getPosts();
         loader.classList.remove('shown');
-        console.log(page);
+        //console.log(page);
         postsData.forEach(el => {
             
             const postEl = document.createElement('div');

@@ -116,8 +116,8 @@ h1 {
     height: 80%;
     background-color: transparent;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: .5rem;
     margin: 1rem 4rem;
     box-shadow: 0 1rem 3rem rgba(0,0,0,.15);

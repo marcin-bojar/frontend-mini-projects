@@ -110,7 +110,7 @@ const manageID = (function() {
             let ID = Math.floor(Math.random() * limit);
             // Check if generated ID was already used
             if(usedIDs.includes(ID)) {
-                // If all IDs where used inform user that list is full
+                // If all IDs were used inform user that list is full
                 if(usedIDs.length >= limit)
                 {
                     alert('List is full! Delete some items in order to be able to add new ones...');
