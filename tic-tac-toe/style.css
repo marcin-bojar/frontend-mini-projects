@@ -210,29 +210,29 @@ h1 {
          0 .3rem 1rem #fff, 0 -.3rem 1rem #fff;
     }
 
-    20% {
+    /* 20% {
         box-shadow: inset 0 -1rem 4rem .5rem rgba(231, 85, 1, 0.9), inset 0 1rem 4rem .5rem rgba(231, 85, 1, 0.9),
          0 -1rem 2rem rgba(231, 85, 1, 0.9), 0 1rem 2rem rgba(231, 85, 1, 0.9),
          0 .3rem 1.5rem #fff, 0 -.3rem 1.5rem #fff;
-    }
+    } */
 
-    40% {
+    50% {
         box-shadow: inset 0 -1rem 5rem  rgba(231, 1, 1, .8), inset 0 1rem 5rem  rgba(231, 1, 1, .8),
          0 -1rem 3rem .5rem rgba(231, 1, 1, .8), 0 1rem 3rem .5rem rgba(231, 1, 1, .8), 
          0 .3rem 2rem #fff, 0 -.3rem 2rem #fff;
     }
 
-    60% {
+    /* 60% {
         box-shadow: inset 0 -1rem 5rem .5rem rgba(245, 41, 5, .9), inset 0 1rem 5rem .5rem rgba(245, 41, 5, .9),
          0 -1rem 3rem rgba(245, 41, 5, .9), 0 1rem 3rem rgba(245, 41, 5, .9), 
          0 .3rem 2rem #fff, 0 -.3rem 2rem #fff;
-    }
+    } */
 
-    80% {
+    /* 80% {
         box-shadow: inset 0 -1rem 3rem .5rem rgba(231, 47, 1, 0.9), inset 0 1rem 3rem .5rem rgba(231, 47, 1, 0.9),
          0 -1rem 2rem rgba(231, 47, 1, 0.9), 0 1rem 2rem rgba(231, 47, 1, 0.9), 
          0 .3rem 1.5rem #fff, 0 -.3rem 1.5rem #fff;
-    }
+    } */
 }
 
 @keyframes color {
