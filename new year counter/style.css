@@ -45,7 +45,8 @@ h1 {
 }
 
 .container {
-    display: flex;
+    /* display: flex */
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -63,6 +64,7 @@ h1 {
 }
 
 .year {
+    display: none;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -80,6 +82,7 @@ h1 {
 
     h1 {
         font-size: 4rem;
+        letter-spacing: 0;
     }
 
     .time {
@@ -92,5 +95,9 @@ h1 {
 
     .time small {
         font-size: 1.75rem;
+    }
+
+    .year {
+        font-size: 12rem;
     }
 }
