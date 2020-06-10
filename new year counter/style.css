@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-image: url('https://images.unsplash.com/photo-1467810563316-b5476525c0f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    color: #fff;
+    font-size: 1.6rem;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, .45);
+    z-index: -1;
+}
+
+h1 {
+    font-size: 6rem;
+    margin-bottom: 3rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time {
+    margin: 2rem;
+}
+
+.time h2 {
+    font-size: 4rem;
+}
+
+.time small {
+    font-size: 2.25rem;
+}
+
+@media only screen and (max-width: 31.25em) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    .time {
+        margin: 1rem;
+    }
+
+    .time h2 {
+        font-size: 2.75rem;
+    }
+
+    .time small {
+        font-size: 1.75rem;
+    }
+}
