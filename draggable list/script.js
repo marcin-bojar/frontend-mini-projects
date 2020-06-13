@@ -14,12 +14,12 @@ const richestPeople = [
     'Larry Page'
   ];
 
-const generatedList = [];
+let generatedList = [];
 
 createList(richestPeople);
 
 function createList(arr) {
-    const newArr = [...arr];
+    const newArr = shuffleList([...arr]);
     
     newArr.forEach((el, i) => {
         const listItem = document.createElement('li'); 
@@ -37,3 +37,21 @@ function createList(arr) {
         list.appendChild(listItem);
     });
 };
+
+// Fisher-Yates shuffle
+function shuffleList(arr) {
+    let newArr = [...arr],
+        n = arr.length,
+        index,
+        temp;
+
+    // While there are unshuffled elements
+    while(n) {
+        index = Math.floor(Math.random() * n--)
+        temp = newArr[n];
+        newArr[n] = newArr[index];
+        newArr[index] = temp;
+    }
+
+    return newArr;
+}
