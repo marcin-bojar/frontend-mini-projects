@@ -17,8 +17,49 @@ const richestPeople = [
 const pipe = (f, g) => (...args) => g(f(...args));
 const renderList = (...fns) => fns.reduce(pipe);
 
+const dragManager = (function() {
+    let dragStartIndex;
+    let dragEndIndex;
+
+    function dragStart() {
+        // console.log('start');
+        dragStartIndex = this.closest('li').getAttribute('data-index');   
+    };
+
+    function drop() {
+        // console.log('end');
+        dragEndIndex = this.closest('li').getAttribute('data-index');
+        generatedListElements = swapListElements(dragStartIndex, dragEndIndex, generatedListElements);
+        this.classList.remove('over');
+    };
+
+    function dragEnter() {
+        // console.log('enter');
+        this.classList.add('over');
+    };
+
+    function dragLeave() {
+        // console.log('leave');
+        this.classList.remove('over');
+    };
+
+    function dragOver(e) {
+        // console.log('over');
+        e.preventDefault();
+        // this.classList.add('over');
+    };
+
+    return {
+        dragStart: dragStart,
+        drop: drop,
+        dragEnter: dragEnter,
+        dragLeave: dragLeave,
+        dragOver: dragOver
+    }
+})();
+
 // Display shuffled list in UI
-const generatedList = renderList(shuffleList, createList)(richestPeople);
+let generatedListElements = renderList(shuffleList, createList)(richestPeople);
 
 function createList(arr) {
     const tempArr = [...arr];
@@ -39,6 +80,7 @@ function createList(arr) {
         
         newArr.push(listItem);
         list.appendChild(listItem);
+        addEventListeners();
     });
 
     return newArr;
@@ -61,3 +103,36 @@ function shuffleList(arr) {
 
     return newArr;
 };
+
+function addEventListeners() {
+    const draggables = document.querySelectorAll('.draggable');
+
+    draggables.forEach(el => {
+        el.addEventListener('dragstart', dragManager.dragStart);
+        el.addEventListener('drop', dragManager.drop);
+        el.addEventListener('dragenter', dragManager.dragEnter);
+        el.addEventListener('dragleave', dragManager.dragLeave);
+        el.addEventListener('dragover', dragManager.dragOver);
+    });
+};
+
+function swapListElements(fromIndex, toIndex, elemArr) {
+    const newElemArr = [...elemArr];
+    const itemOne = newElemArr[fromIndex].querySelector('.draggable');
+    const itemTwo = newElemArr[toIndex].querySelector('.draggable');
+
+    newElemArr[fromIndex].appendChild(itemTwo);
+    newElemArr[toIndex].appendChild(itemOne);
+    
+    return newElemArr;
+};
+
+function checkOrder() {
+    generatedListElements.forEach((el, i) => {
+        el.className = 'list__item';
+        const name = el.querySelector('.list__person').innerText.trim();
+        richestPeople[i] === name ? el.classList.add('right') : el.classList.add('wrong');
+    })
+};
+
+checkBtn.addEventListener('click', checkOrder);

@@ -34,7 +34,14 @@ body {
 .list__item {
     display: flex; 
     cursor: pointer;
-    background-color: #153233;
+}
+
+.list__item.right .list__person {
+    color: #09da09;
+}
+
+.list__item.wrong .list__person {
+    color: #eb1710;
 }
 
 .list__item:not(:last-of-type) {
@@ -44,6 +51,8 @@ body {
 .list__item i {
     align-self: center;
     margin-left: auto;
+    /* Prevent dragleave event to fire when hover over icon */
+    pointer-events: none;
 }
 
 .list__item span {
@@ -58,6 +67,8 @@ body {
 
 .list__person {
    text-align: center;
+       /* Prevent dragleave event to fire when hover over name */
+   pointer-events: none;
 }
 
 .draggable {
@@ -66,6 +77,11 @@ body {
     align-items: center;
     flex: 1;
     padding: 1.5rem;
+    background-color: #153233;
+}
+
+.draggable.over {
+    background-color: #285f61;
 }
 
 .check-btn {
