@@ -26,12 +26,13 @@ function createList(arr) {
     
     tempArr.forEach((el, i) => {
         const listItem = document.createElement('li'); 
+        listItem.className = 'list__item';
         listItem.setAttribute('data-index', i);
 
         listItem.innerHTML = `
             <span>${i + 1}</span>
             <div class="draggable" draggable="true">
-                <p class="person">${el}</p>
+                <p class="list__person">${el}</p>
                 <i class="fas fa-grip-lines"></i>
             </div>
         `;
@@ -46,7 +47,7 @@ function createList(arr) {
 // Fisher-Yates shuffle
 function shuffleList(arr) {
     let newArr = [...arr],
-        n = arr.length,
+        n = newArr.length,
         index,
         temp;
 
