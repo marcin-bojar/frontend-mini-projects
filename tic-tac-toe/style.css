@@ -13,7 +13,7 @@ html {
 
 body {
     box-sizing: border-box;
-    background-image: linear-gradient(rgba(132, 158, 182, 0.377), rgba(95, 158, 66, 0.5)), url(./img/back-min.jpg);
+    background-image: linear-gradient(#849eb660, #5f9e4280), url(./img/back-min.jpg);
     background-position: bottom;
     background-size: cover;
     background-repeat: no-repeat;
@@ -84,37 +84,8 @@ h1 {
     color: #464646;
 }
 
-@media only screen and (max-width: 800px) {
-    .player.active .player__heading {
-        font-size: 4rem;
-    }
-
-    .player__heading {
-        font-size: 3.25rem;
-    }
-
-    .player__score {
-        font-size: 4.5rem;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .player {
-        height: 7rem;
-    }
-
-    .player.active .player__heading {
-        font-size: 3.4rem;
-    }
-
-    .player__heading {
-        font-size: 2.7rem;
-    }
-}
-
 .game-board {
-    width: 75%;
-    height: 80%;
+    width: 60%;
     background-color: transparent;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -130,13 +101,19 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 19vh;
+    font-size: 9vw;
     border-radius: 5px;
     user-select: none;
+    position: relative;
+}
+
+.game-board__field:after {
+    content: '';
+    padding-top: 100%;
 }
 
 .game-board__field.selected {
-    background-color: rgba(237, 237, 237, .9);
+    background-color: #ededede6;
     cursor: default;
 }
 
@@ -245,4 +222,36 @@ h1 {
     60% {
         color: #311000;
     }  
+}
+
+@media only screen and (max-width: 800px) {
+    .player.active .player__heading {
+        font-size: 4rem;
+    }
+
+    .player__heading {
+        font-size: 3.25rem;
+    }
+
+    .player__score {
+        font-size: 4.5rem;
+    }
+
+    .game-board {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .player.active .player__heading {
+        font-size: 3.4rem;
+    }
+
+    .player__heading {
+        font-size: 2.7rem;
+    }
+
+    .game-board {
+        width: 95%;
+    }
 }
