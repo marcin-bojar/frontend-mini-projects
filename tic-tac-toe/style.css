@@ -34,6 +34,7 @@ body {
     align-items: center;
     width: 100vw;
     min-height: 100vh;
+    position: relative;
 }
 
 h1 {
@@ -224,6 +225,66 @@ h1 {
     }  
 }
 
+@media only screen and (min-width: 1700px) {
+    .container {
+        max-width: 140rem;
+    }
+}
+
+@media only screen and (min-width: 2100px) {
+    .game-board__field {
+        font-size: 8vw;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .game-board__field {
+        font-size: 11vw;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .player {
+        position: absolute;
+        top: 10rem;
+        width: 25rem;
+    }
+
+    .player.player0 {
+        left: 5rem;
+    }
+
+    .player.player1 {
+        right: 5rem;
+    }
+
+    .game-board  {
+        margin: 1rem auto;
+    }
+
+    .game-board__field {
+        font-size: 13vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .player {
+        display: none;
+    }
+
+    .game-board__field {
+        font-size: 16vw;
+    }
+
+    .game-board {
+        width: 80%;
+    }
+
+    .game-board__field {
+        font-size: 15vw;
+    }
+}
+
 @media only screen and (max-width: 800px) {
     .player.active .player__heading {
         font-size: 4rem;
@@ -240,6 +301,10 @@ h1 {
     .game-board {
         width: 80%;
     }
+
+    .game-board__field {
+        font-size: 20vw;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -253,5 +318,15 @@ h1 {
 
     .game-board {
         width: 95%;
+    }
+
+    .game-board__field {
+        font-size: 25vw;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .game-board__field {
+        font-size: 30vw;
     }
 }
