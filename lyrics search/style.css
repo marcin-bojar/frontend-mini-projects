@@ -42,7 +42,8 @@ header h1 {
 }
 
 .container {
-    width: 30rem;
+    width: 50rem;
+    max-width: 100%; 
 }
 
 .centered {
@@ -60,22 +61,24 @@ header h1 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 0;
+    right: 2px;
     border: none;
     border-radius: 2rem;
     padding: 1rem 1.5rem;
     background-color: var(--bg-color);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-family: inherit;
     color: #fff;
+    text-transform: uppercase;
 }
 
-.form button:focus {
+.form button:focus,
+.search:focus {
     outline: none;
 }
 
 .search {
-    padding: 1rem 1.5rem;
+    padding: 1.4rem 1.7rem;
     border-radius: 2rem;
     width: 100%;
     border: none;
