@@ -5,18 +5,33 @@ const more = document.getElementById('more');
 const list = document.getElementById('list');
 
 async function searchSongs(term) {
-    const res = await fetch(`https://api.lyrics.ovh/suggest/${term}`);
-    const data = await res.json();
+    try {
+        const res = await fetch(`https://api.lyrics.ovh/suggest/${term}`);
+        const data = await res.json();
+        
+        console.log(data);
+        renderResults(data);
+    } catch(error) {
+        alert(error);
+    }
     
-    console.log(data);
-    renderResults(data);
 };
 
 async function getSongLyrics(artist, title) {
-    const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
-    const data = await res.json();
-    console.log(data);
-    list.innerHTML = `${data.lyrics}`;
+    try {
+        const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
+        const data = await res.json();
+        if(!data.lyrics) {
+            list.innerHTML = `${data.error}`;
+        } else {
+            list.innerHTML = `${data.lyrics}`;
+        }
+    } catch(error) {
+        alert(error);
+    }
+    
+    
+    
 };
 
 function parseTitle(title) {
@@ -37,6 +52,15 @@ function renderResults(data) {
 
         list.insertAdjacentHTML('beforeend', listItem);
     });
+
+    if(data.next || data.prev) {
+        more.innerHTML = `
+        ${data.next ? '<button class="btn">Next</button>' : ''}
+        ${data.prev ? '<button class="btn">Prev</button>' : ''}
+        `     
+    } else {
+        more.innerHTML = '';
+    }
 };
 
 //Event listeners
