@@ -61,7 +61,7 @@ header h1 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 2px;
+    right: 4px;
     border: none;
     border-radius: 2rem;
     padding: 1rem 1.5rem;
@@ -85,4 +85,14 @@ header h1 {
     font-family: inherit;
     font-size: 1.4rem;
     color: #2b2b2b;
+}
+
+.songs-list {
+    list-style: none;
+}
+
+.songs-list__item {
+    margin: 1rem;
+    cursor: pointer;
+    color: #333;
 }
