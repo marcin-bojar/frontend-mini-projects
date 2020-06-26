@@ -4,6 +4,7 @@ const result = document.getElementById('result');
 const more = document.getElementById('more');
 const list = document.getElementById('list');
 
+// Search for songs or artists
 async function searchSongs(term) {
     try {
         const res = await fetch(`https://api.lyrics.ovh/suggest/${term}`);
@@ -16,16 +17,17 @@ async function searchSongs(term) {
     
 };
 
+// Get the lyrics of chosen song 
 async function getSongLyrics(artist, title) {
     try {
         const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
         const data = await res.json();
         if(!data.lyrics) {
             list.innerHTML = `${data.error}`;
+            more.innerHTML = '';
         } else {
-            list.innerHTML = `<h2>${artist}</h2> - <span>${title}</span><br>
+            list.innerHTML = `<div class="song-heading"><h2>${artist}</h2> - <span class="title">${title}</span></div>
             ${parseLyrics(data.lyrics)}`;
-
             more.innerHTML = '';
         }
     } catch(error) {
@@ -41,9 +43,10 @@ function parseLyrics(lyrics) {
     return lyrics.replace(/\r\n|\r|\n/g, '<br>');
 };
 
+// Get the list of next 15 songs from search query
 async function getMoreSongs(url) {
     try {
-        const res = await fetch(url);
+        const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
         const data = await res.json();
         
         renderResults(data);
@@ -52,6 +55,7 @@ async function getMoreSongs(url) {
     }
 };
 
+// Display search results in UI
 function renderResults(data) {
     // Clear previous search results
     list.innerHTML = '';
@@ -61,12 +65,14 @@ function renderResults(data) {
         title = parseTitle(el.title);
         
         const listItem = `
-            <li class="songs-list__item" onclick = "getSongLyrics('${el.artist.name}', '${title}')">${el.artist.name} - ${el.title}</li>
+            <li class="songs-list__item" onclick = "getSongLyrics('${el.artist.name}', '${title}')">
+            <h2>${el.artist.name}</h2> - <span class="title">${el.title}</span></li>
         `;
 
         list.insertAdjacentHTML('beforeend', listItem);
     });
-
+    
+    // If there is more songs found show next or/and prev pagination buttons 
     if(data.next || data.prev) {
         more.innerHTML = `
         ${data.next ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>` : ''}

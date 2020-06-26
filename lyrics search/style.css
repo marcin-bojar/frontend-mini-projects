@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 :root {
-    --bg-color: #a8805f;
+    --btn-color: #f16100 ;
 }
 
 * {
@@ -16,7 +16,7 @@ html {
 
 body {
     box-sizing: border-box;
-    background-color: var(--bg-color);
+    background-color: #a8805f;
     font-size: 1.6rem;
     font-family: 'Ubuntu', sans-serif;
 }
@@ -43,6 +43,18 @@ header h1 {
 
 h2 {
     display: inline-block;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-style: italic;
+}
+
+.song-heading {
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
 .container {
@@ -72,7 +84,7 @@ h2 {
     border: none;
     border-radius: 2rem;
     padding: 1rem 1.5rem;
-    background-color: var(--bg-color);
+    background-color: var(--btn-color);
     font-size: 1.3rem;
     font-family: inherit;
     color: #fff;
@@ -101,15 +113,22 @@ h2 {
 .songs-list__item {
     margin: 1rem;
     cursor: pointer;
-    color: #333;
+    color: #000;
+    padding: .75rem 0;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
 .btn {
     cursor: pointer;
-    border: none;
+    border: 1px solid #fff;
     box-shadow: 0 3px 5px rgba(0,0,0, .25);
     border-radius: 1rem;
     padding: .75rem 1.5rem;
-    background-color: #b40063;
+    background-color: var(--btn-color);
     color: #fff;
+    font-size: inherit;
+    font-family: inherit;
+    text-transform: uppercase;
 }
