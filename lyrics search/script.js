@@ -9,7 +9,6 @@ async function searchSongs(term) {
         const res = await fetch(`https://api.lyrics.ovh/suggest/${term}`);
         const data = await res.json();
         
-        console.log(data);
         renderResults(data);
     } catch(error) {
         alert(error);
@@ -24,18 +23,33 @@ async function getSongLyrics(artist, title) {
         if(!data.lyrics) {
             list.innerHTML = `${data.error}`;
         } else {
-            list.innerHTML = `${data.lyrics}`;
+            list.innerHTML = `<h2>${artist}</h2> - <span>${title}</span><br>
+            ${parseLyrics(data.lyrics)}`;
+
+            more.innerHTML = '';
         }
     } catch(error) {
         alert(error);
     }
-    
-    
-    
 };
 
 function parseTitle(title) {
     return title.replace(/'/g, '');
+};
+
+function parseLyrics(lyrics) {
+    return lyrics.replace(/\r\n|\r|\n/g, '<br>');
+};
+
+async function getMoreSongs(url) {
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        renderResults(data);
+    } catch(error) {
+        alert(error);
+    }
 };
 
 function renderResults(data) {
@@ -55,9 +69,9 @@ function renderResults(data) {
 
     if(data.next || data.prev) {
         more.innerHTML = `
-        ${data.next ? '<button class="btn">Next</button>' : ''}
-        ${data.prev ? '<button class="btn">Prev</button>' : ''}
-        `     
+        ${data.next ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>` : ''}
+        ${data.prev ? `<button class="btn" onclick="getMoreSongs('${data.prev}')">Prev</button>` : ''}
+        `;   
     } else {
         more.innerHTML = '';
     }
