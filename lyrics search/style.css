@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 :root {
-    --btn-color: #f16100 ;
+    --btn-color: #f16100;
+    --btn-hover-color: #d45500;
 }
 
 * {
@@ -89,10 +90,31 @@ h2 {
     font-family: inherit;
     color: #fff;
     text-transform: uppercase;
+    transition: background-color .2s;
+}
+
+.btn {
+    cursor: pointer;
+    border: 1px solid #fff;
+    box-shadow: 0 3px 5px rgba(0,0,0, .25);
+    border-radius: 1rem;
+    padding: .75rem 1.5rem;
+    background-color: var(--btn-color);
+    color: #fff;
+    font-size: inherit;
+    font-family: inherit;
+    text-transform: uppercase;
+    transition: background-color .2s;
+}
+
+.form button:hover,
+.btn:hover {
+    background-color: var(--btn-hover-color);
 }
 
 .form button:focus,
-.search:focus {
+.search:focus,
+.btn:focus {
     outline: none;
 }
 
@@ -118,17 +140,4 @@ h2 {
     border-bottom: 1px solid #fff;
     margin-bottom: 3rem;
     text-align: center;
-}
-
-.btn {
-    cursor: pointer;
-    border: 1px solid #fff;
-    box-shadow: 0 3px 5px rgba(0,0,0, .25);
-    border-radius: 1rem;
-    padding: .75rem 1.5rem;
-    background-color: var(--btn-color);
-    color: #fff;
-    font-size: inherit;
-    font-family: inherit;
-    text-transform: uppercase;
 }

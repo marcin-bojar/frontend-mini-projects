@@ -36,7 +36,7 @@ async function getSongLyrics(artist, title) {
 };
 
 function parseTitle(title) {
-    return title.replace(/'/g, '');
+    return title.replace(/'|"|`/g, '');
 };
 
 function parseLyrics(lyrics) {
